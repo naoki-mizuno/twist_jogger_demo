@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="joy_dev" default="/dev/input/js0" />
+  <!-- Choose from: ps4_wired, ps4_wireless, elecom_small -->
+  <arg name="joypad_type" default="ps4_wired" />
+
+  <node pkg="twist_jogger" type="twist_jogger_node" name="twist_jogger" output="screen" >
+    <rosparam file="$(find twist_jogger_demo)/config/ur5.yaml" subst_value="true" />
+  </node>
+
+  <include file="$(find mofpy_demo)/launch/manipulator.launch" >
+    <arg name="joy_dev" value="$(arg joy_dev)" />
+    <arg name="joypad_type" value="$(arg joypad_type)" />
+  </include>
+
+  <include file="$(find ur_gazebo)/launch/ur5_joint_limited.launch" />
+
+  <include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch" >
+    <arg name="sim" value="true" />
+  </include>
+
+  <include file="$(find ur5_moveit_config)/launch/moveit_rviz.launch" >
+    <arg name="config" value="true" />
+  </include>
+</launch>
