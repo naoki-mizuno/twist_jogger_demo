@@ -13,7 +13,7 @@
     <arg name="joypad_type" value="$(arg joypad_type)" />
   </include>
 
-  <include file="$(find ur_gazebo)/launch/ur5_joint_limited.launch" />
+  <include file="$(find ur_gazebo)/launch/ur5.launch" />
 
   <include file="$(find ur5_moveit_config)/launch/ur5_moveit_planning_execution.launch" >
     <arg name="sim" value="true" />
